@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      li {
+        float: left;
+        border-right:1px solid #bbb;
+      }
+      li:last-child {
+        border-right: none;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      li a:hover:not(.active) {
+      }
+      .active {
+        background-color: #4CAF50;
+      }
+  </style>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <script>
+    window.onload = function () {
+  
+var chart = new CanvasJS.Chart("chartContainer", {
+  animationEnabled: true,
+  
+  title:{
+    text:"Prediction Probabilities",
+    fontFamily: "tahoma"
+  },
+  axisX:{
+    interval: 1
+  },
+  axisY2:{
+    interlacedColor: "rgba(1,77,101,.2)",
+    gridColor: "rgba(1,77,101,.1)",
+    title: "Probabilities %",
+    fontFamily: "tahoma"
+  },
+  data: [{
+    type: "bar",
+    name: "companies",
+    axisYType: "secondary",
+    color: "#014D65",
+    dataPoints: [{'y': 0.00019076653643423924, 'label': 'Komodo dragon'}, {'y': 0.00026907807750831125, 'label': 'ice bear'}, {'y': 0.0003657779870991362, 'label': 'Arabian camel'}, {'y': 0.0005343378234101692, 'label': 'chimpanzee'}, {'y': 0.0006555971594934817, 'label': 'brown bear'}, {'y': 0.0009623282494430896, 'label': 'gorilla'}, {'y': 0.0010107451998919714, 'label': 'hippopotamus'}, {'y': 3.6346182227134705, 'label': 'African elephant'}, {'y': 6.276895105838776, 'label': 'tusker'}, {'y': 90.08374214172363, 'label': 'Indian elephant'}]
+
+  }]
+});
+chart.render();
+
+}
+
+
+    var val = document.getElementById("valR").value;
+    document.getElementById("range").innerHTML=val;
+    document.getElementById("img").src = "images/elephant_lime/elephant" + val +".png";
+
+
+    function showVal(newVal){
+      document.getElementById("range").innerHTML=newVal;
+      document.getElementById("img").src = "images/elephant_lime/elephant" + newVal +".png";
+    }
+
+
+
+  </script>
+</head>
+<body>
+    <header>
+   <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <strong>XAI Demo: Ethan Oliver and Jake Kroner  </strong>
+      </a>
+      <ul>
+                <li><a href="https://xai-capstone.herokuapp.com/faces">Face Combinations</a></li>
+        <li><a href="https://xai-capstone.herokuapp.com/dictionary">Semantic Dictionary</a></li>
+        <li><a href="https://xai-capstone.herokuapp.com/neuron">Neuron Combinations</a></li>
+        <li><a class="active" href="https://xai-capstone.herokuapp.com/elephant">Jumbo</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+</header>
+  <div class="container">
+    <h2>JUMBO</h2>
+    <div class=row>
+      <div class="col">
+        <img class="img-fluid" id="img" src =  "images/elephant_lime/elephant1.png">
+        <input id="valR" type="range" min="1" max="10" value="1" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" />
+        <span id="range">1</span>
+        <p>What the network thinks is the most important part of the image. Slide to reveal superpixels in descending level of importance.</p>
+        
+      </div>
+      <div class="col">
+        <img class="img-fluid" src =  "images/elephant_grid/elephant.png">
+      </div>
+      <div class="col">
+          <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class='row'>
+      Activation Grids <br>
+    </div>
+    <div class="row">
+      <div class="col"> Original <img class="img-fluid" height=224 width = 224 src =  "images/elephant_grid/elephant.png"> </div>
+      <div class="col"> 3a <img class="img-fluid" height=224 width = 224 src =  "images/elephant_grid/elephant_mixed3a_grid.png"> </div>
+      <div class="col"> 3b<img class="img-fluid" height=224 width = 224 src =  "images/elephant_grid/elephant_mixed3b_grid.png"></div>
+      <div class="col"> 4a<img class="img-fluid" height=224 width = 224 src =  "images/elephant_grid/elephant_mixed4a_grid.png"></div>
+      <div class="col"> 4b<img class="img-fluid" height=224 width = 224 src =  "images/elephant_grid/elephant_mixed4b_grid.png"></div>
+      <div class="col"> 4c<img class="img-fluid" height=224 width = 224 src =  "images/elephant_grid/elephant_mixed4c_grid.png"></div>
+      <div class="col"> 4d<img class="img-fluid" height=224 width = 224 src =  "images/elephant_grid/elephant_mixed4d_grid.png"></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class='row'>
+      Layer Deepdreams <br>
+    </div>
+    <div class="row">
+      <div class="col"> Original <img class="img-fluid" height=224 width = 224 src =  "images/elephant_grid/elephant.png"> </div>
+      <div class="col"> 3a <img class="img-fluid" height=224 width = 224 src =  "images/elephant_gifs/elephant_mixed3a.gif"> </div>
+      <div class="col"> 3b<img class="img-fluid" height=224 width = 224 src =  "images/elephant_gifs/elephant_mixed3b.gif"></div>
+      <div class="col"> 4a<img class="img-fluid" height=224 width = 224 src =  "images/elephant_gifs/elephant_mixed4a.gif"></div>
+      <div class="col"> 4b<img class="img-fluid" height=224 width = 224 src =  "images/elephant_gifs/elephant_mixed4b.gif"></div>
+      <div class="col"> 4c<img class="img-fluid" height=224 width = 224 src =  "images/elephant_gifs/elephant_mixed4c.gif"></div>
+      <div class="col"> 4d<img class="img-fluid" height=224 width = 224 src =  "images/elephant_gifs/elephant_mixed4d.gif"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

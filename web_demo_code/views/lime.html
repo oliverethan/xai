@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      li {
+        float: left;
+        border-right:1px solid #bbb;
+      }
+      li:last-child {
+        border-right: none;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      li a:hover:not(.active) {
+      }
+      .active {
+        background-color: #4CAF50;
+      }
+  </style>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <script>
+    window.onload = function () {
+  
+var chart = new CanvasJS.Chart("chartContainer", {
+  animationEnabled: true,
+  
+  title:{
+    text:"Prediction Probabilities",
+    fontFamily: "tahoma"
+  },
+  axisX:{
+    interval: 1
+  },
+  axisY2:{
+    interlacedColor: "rgba(1,77,101,.2)",
+    gridColor: "rgba(1,77,101,.1)",
+    title: "Probabilities",
+    fontFamily: "tahoma"
+  },
+  data: [{
+    type: "bar",
+    name: "companies",
+    axisYType: "secondary",
+    color: "#014D65",
+    dataPoints: [{'y': 0.2919891383498907, 'label': 'leatherback turtle'}, {'y': 0.3882830496877432, 'label': 'rock beauty'}, {'y': 0.4035256803035736, 'label': 'rock crab'}, {'y': 0.4316653124988079, 'label': 'ski'}, {'y': 1.356841903179884, 'label': 'sea snake'}, {'y': 1.708144135773182, 'label': 'lionfish'}, {'y': 5.5190809071063995, 'label': 'loggerhead'}, {'y': 13.485710322856903, 'label': 'scuba diver'}, {'y': 18.652869760990143, 'label': 'coral reef'}, {'y': 55.60196042060852, 'label': 'snorkel'}]
+
+  }]
+});
+chart.render();
+
+}
+
+
+    var val = document.getElementById("valR").value;
+    document.getElementById("range").innerHTML=val;
+    document.getElementById("img").src = "images/scuba_lime/scuba_" + val +".png";
+
+
+    function showVal(newVal){
+      document.getElementById("range").innerHTML=newVal;
+      document.getElementById("img").src = "images/scuba_lime/scuba_" + newVal +".png";
+    }
+
+
+
+  </script>
+</head>
+<body>
+    <header>
+   <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <strong>XAI Demo: Ethan Oliver and Jake Kroner  </strong>
+      </a>
+      <ul>
+        <li><a href="https://xai-capstone.herokuapp.com/neuron">Neuron Combinations</a></li>
+        <li><a class="active" href="https://xai-capstone.herokuapp.com/lime">Scuba Diver</a></li>
+        <li><a href="https://xai-capstone.herokuapp.com/elephant">Jumbo</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+</header>
+  <div class="container">
+    <h2>Scuba Diver</h2>
+    <div class=row>
+      <div class="col">
+        <img class="img-fluid" id="img" src =  "images/scuba_lime/scuba_1.png">
+        <input id="valR" type="range" min="1" max="10" value="1" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" />
+        <span id="range">1</span>
+        <p>What the network thinks is the most important part of the image. Slide to reveal superpixels in descending level of importance.</p>
+        
+      </div>
+      <div class="col">
+        <img class="img-fluid" src =  "images/scuba_grid/scuba.png">
+      </div>
+      <div class="col">
+          <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class='row'>
+      Activation Grids <br>
+    </div>
+    <div class="row">
+      <div class="col"> Original <img class="img-fluid" height=224 width = 224 src =  "images/scuba_grid/scuba.png"> </div>
+      <div class="col"> 3a <img class="img-fluid" height=224 width = 224 src =  "images/scuba_grid/scuba_mixed3a_grid.png"> </div>
+      <div class="col"> 3b<img class="img-fluid" height=224 width = 224 src =  "images/scuba_grid/scuba_mixed3b_grid.png"></div>
+      <div class="col"> 4a<img class="img-fluid" height=224 width = 224 src =  "images/scuba_grid/scuba_mixed4a_grid.png"></div>
+      <div class="col"> 4b<img class="img-fluid" height=224 width = 224 src =  "images/scuba_grid/scuba_mixed4b_grid.png"></div>
+      <div class="col"> 4c<img class="img-fluid" height=224 width = 224 src =  "images/scuba_grid/scuba_mixed4c_grid.png"></div>
+      <div class="col"> 4d<img class="img-fluid" height=224 width = 224 src =  "images/scuba_grid/scuba_mixed4d_grid.png"></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class='row'>
+      Layer Deepdreams <br>
+    </div>
+    <div class="row">
+      <div class="col"> Original <img class="img-fluid" height=224 width = 224 src =  "images/scuba_grid/scuba.png"> </div>
+      <div class="col"> 3a <img class="img-fluid" height=224 width = 224 src =  "images/scuba_gifs/scuba_mixed3a.gif"> </div>
+      <div class="col"> 3b<img class="img-fluid" height=224 width = 224 src =  "images/scuba_gifs/scuba_mixed3b.gif"></div>
+      <div class="col"> 4a<img class="img-fluid" height=224 width = 224 src =  "images/scuba_gifs/scuba_mixed4a.gif"></div>
+      <div class="col"> 4b<img class="img-fluid" height=224 width = 224 src =  "images/scuba_gifs/scuba_mixed4b.gif"></div>
+      <div class="col"> 4c<img class="img-fluid" height=224 width = 224 src =  "images/scuba_gifs/scuba_mixed4c.gif"></div>
+      <div class="col"> 4d<img class="img-fluid" height=224 width = 224 src =  "images/scuba_gifs/scuba_mixed4d.gif"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

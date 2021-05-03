@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      li {
+        float: left;
+        border-right:1px solid #bbb;
+      }
+      li:last-child {
+        border-right: none;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      li a:hover:not(.active) {
+      }
+      .active {
+        background-color: #4CAF50;
+      }
+      body {
+    padding-bottom: 50px;
+} 
+</style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script>
+    var box_1_id = ""
+    var box_2_id = ""
+
+    function dropcopy_1(ev)
+    {
+      ev.preventDefault();
+      var data=ev.dataTransfer.getData("Text");
+      box_1_id = data
+      var copyimg = document.getElementById("plus1");
+      var original = document.getElementById(data);
+      copyimg.src = original.src;
+      update()
+
+    }
+
+    function dropcopy_2(ev)
+    {
+      ev.preventDefault();
+      var data=ev.dataTransfer.getData("Text");
+      box_2_id = data
+      var copyimg = document.getElementById("plus2");
+      var original = document.getElementById(data);
+      copyimg.src = original.src;
+      update()
+
+    }
+
+    function update(){
+      console.log(box_1_id)
+      console.log(box_2_id)
+      var fname = ""
+      var ind = "images/gen/individual/"
+      var joint = "images/gen/joint/"
+      if(box_2_id != "" && box_1_id != ""){
+        if(box_1_id == box_2_id){
+          fname = ind + box_1_id + ".png"
+        }
+        else{
+          if (box_1_id < box_2_id){
+           fname = joint + box_1_id + "x" + box_2_id + ".png"
+         }
+         else{
+          fname = joint + box_2_id + "x" + box_1_id + ".png"     
+        }
+      }
+      console.log(fname)
+      var img = document.getElementById("result");
+      img.src = fname
+    }
+
+  }
+
+
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.replaceChild(document.getElementById(data));
+  }
+</script>
+</head>
+<body>
+  <header>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <strong>XAI Demo: Ethan Oliver and Jake Kroner  </strong>
+      </a>
+      <ul>        
+        <li><a href="https://xai-capstone.herokuapp.com/faces">Face Combinations</a></li>
+        <li><a href="https://xai-capstone.herokuapp.com/dictionary">Semantic Dictionary</a></li>
+        <li><a class="active" href="https://xai-capstone.herokuapp.com/neuron">Neuron Combinations</a></li>
+        <li><a href="https://xai-capstone.herokuapp.com/elephant">Jumbo</a></li>
+
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class = container>
+  <h1>Neuron Combinations</h1>
+  <p>Drag and drop Neurons to combine their activations!</p>
+  <p>These neurons are activation visualizations from the Inception V1 network. Neuron combinations represent images that maximally visualize two separate filters within the convolutional layer. This demo is a human interpratable visualization of how these neurons interact to build more complex concepts in image identification </p>
+</div>
+  <div class = container>
+    <div class = "row">
+      <div class = "col">
+        <div class = "img" id="div1" ondrop="dropcopy_1(event)" ondragover="allowDrop(event)">
+          <img class="img-fluid" id="plus1" src="images/neurondotted.png" alt="Add image 1" draggable="false">
+        </div>
+      </div>
+      <div class = "col">
+        <img class="img-fluid" id="ads" src="images/plus.png"  draggable="false">
+      </div>
+      <div class = "col">
+        <div class = "img" id="div2" ondrop="dropcopy_2(event)" ondragover="allowDrop(event)">
+          <img class="img-fluid" id="plus2" src="images/neurondotted.png" alt="Add image 2" draggable="false">
+        </div>
+      </div>
+      <div class = "col">
+        <img class="img-fluid" id="ads" src="images/equal.png"  draggable="false">
+      </div>
+      <div class = "col">
+        <div class = "img" id="div3" >
+          <img class="img-fluid" id="result" src="images/neuron.png" draggable="false">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class = "container">
+    <div class = "row">
+      <img id="layermap" src="images/layermap.png" draggable="false">
+    </div>
+  </div>
+
+  <div class = "container" >
+    <div class = "row">
+      <div class = "col">
+        <h5>3b Neuron Activations</h5>
+        <img id="mixed3b_pre_relu7" src="images/gen/individual/mixed3b_pre_relu7.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed3b_pre_relu17" src="images/gen/individual/mixed3b_pre_relu17.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed3b_pre_relu52" src="images/gen/individual/mixed3b_pre_relu52.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed3b_pre_relu65" src="images/gen/individual/mixed3b_pre_relu65.png" draggable="true" ondragstart="drag(event)">
+      </div>
+
+      <div class = "col">
+        <h5>4a Neuron Activations</h5>
+        <img id="mixed4a_pre_relu41" src="images/gen/individual/mixed4a_pre_relu41.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed4a_pre_relu49" src="images/gen/individual/mixed4a_pre_relu49.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed4a_pre_relu65" src="images/gen/individual/mixed4a_pre_relu65.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed4a_pre_relu89" src="images/gen/individual/mixed4a_pre_relu89.png" draggable="true" ondragstart="drag(event)">
+      </div>
+
+      <div class = "col">
+        <h5>4b Neuron Activations</h5>
+        <img id="mixed4b_pre_relu4" src="images/gen/individual/mixed4b_pre_relu4.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed4b_pre_relu9" src="images/gen/individual/mixed4b_pre_relu9.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed4b_pre_relu29" src="images/gen/individual/mixed4b_pre_relu29.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed4b_pre_relu66" src="images/gen/individual/mixed4b_pre_relu66.png" draggable="true" ondragstart="drag(event)">
+
+      </div>
+
+      <div class = "col">
+        <h5>4c Neuron Activations</h5>
+        <img id="mixed4c_pre_relu0" src="images/gen/individual/mixed4c_pre_relu0.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed4c_pre_relu7" src="images/gen/individual/mixed4c_pre_relu7.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed4c_pre_relu11" src="images/gen/individual/mixed4c_pre_relu11.png" draggable="true" ondragstart="drag(event)">
+        <img id="mixed4c_pre_relu23" src="images/gen/individual/mixed4c_pre_relu23.png" draggable="true" ondragstart="drag(event)">
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>

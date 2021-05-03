@@ -1,0 +1,13 @@
+{
+	"name": "xai",
+	"version": "1.0.0",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"express": "^4.13.3",
+		"jade": "^1.11.0"
+	},
+	"author": "Jake Kroner",
+	"license": "ISC"
+}
