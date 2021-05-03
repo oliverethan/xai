@@ -1,0 +1,4 @@
+1. Copy model data files from https://github.com/davidsandberg/facenet
+2. Freeze the graph as a text file using the modified freeze_graph.py
+3. Replace the training op variable in the pbtext with a constant
+4. Convert the graph back to binary using pbconverter.py
